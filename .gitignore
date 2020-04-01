@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 *.tar
+places365_standard/
+*.txt
