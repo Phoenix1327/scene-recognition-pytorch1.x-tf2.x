@@ -35,11 +35,14 @@ def main():
     
     run_time = str(datetime.datetime.now())
     cfgs = load_configs(CONFIG_FILE)
+
+    # create log root dir and weight root dir
+    mkdir(cfgs['weight_dir'])
+    mkdir(cfgs['log_dir'])
     
     # create logger
     log_dir = osp.join(cfgs['log_dir'], cfgs['arch'])
-    if not osp.isdir(log_dir):
-        mkdir(log_dir)
+    mkdir(log_dir)
 
     cfgs['log_name'] = cfgs['arch'] + '_' + cfgs['dataset']
     logger = setup_logger(cfgs['log_name'], log_dir, get_rank(), run_time + '.txt')
@@ -85,14 +88,14 @@ def main():
     torch.backends.cudnn.benchmark = True
 
     # Data loading code
-    traindir = osp.join(cfgs['data'], 'train')
-    valdir = osp.join(cfgs['data'], 'val')
+    traindir = osp.join(cfgs['data_path'], 'train')
+    valdir = osp.join(cfgs['data_path'], 'val')
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
 
     train_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(traindir, transforms.Compose([
-            transforms.RandomSizedCrop(224),
+            transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize,
@@ -102,7 +105,7 @@ def main():
 
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(valdir, transforms.Compose([
-            transforms.Scale(256),
+            transforms.Resize(256),
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             normalize,
@@ -115,7 +118,7 @@ def main():
 
     optimizer = torch.optim.SGD(model.parameters(), cfgs['lr'],
                                 momentum=cfgs['momentum'],
-                                weight_decay=cfgs['weight_decay'])
+                                weight_decay=float(cfgs['weight_decay']))
 
     if cfgs['evaluate']:
         validate(val_loader, model, criterion, cfgs)
@@ -138,7 +141,7 @@ def main():
             'arch': cfgs['arch'],
             'state_dict': model.state_dict(),
             'best_acc1': best_acc1,
-        }, is_best, cfgs['arch'].lower())
+        }, is_best, cfgs['weight_dir'] + '/' + cfgs['arch'].lower())
 
 
 def train(train_loader, model, criterion, optimizer, epoch, cfgs):

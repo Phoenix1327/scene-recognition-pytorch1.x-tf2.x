@@ -20,3 +20,5 @@ def setup_logger(name, save_dir, distributed_rank, filename="log.txt"):
         fh.setLevel(logging.DEBUG)
         fh.setFormatter(formatter)
         logger.addHandler(fh)
+    
+    return logger
