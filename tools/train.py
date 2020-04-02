@@ -36,7 +36,7 @@ def main():
     run_time = str(datetime.datetime.now())
     cfgs = load_configs(CONFIG_FILE)
 
-    # create log root dir and weight root dir
+    # create log dir and weight dir
     mkdir(cfgs['weight_dir'])
     mkdir(cfgs['log_dir'])
     
