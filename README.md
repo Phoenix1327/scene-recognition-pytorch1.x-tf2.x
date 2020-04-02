@@ -8,4 +8,18 @@ Scene recognition models based on pytorch and TF2.0
 conda env create -f environment.yml python=3.7
 
 conda activate scene_pytorch_tf
+
+export PYTHONPATH=$PYTHONPATH:$(pwd)
 ```
+
+## Train
+
+### PyTorch == 1.x
+
+```bash
+python tools/train.py
+```
+
+### Tensorflow == 2.x
+
+- [ ] to do
