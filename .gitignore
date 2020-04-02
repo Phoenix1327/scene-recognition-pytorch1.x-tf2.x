@@ -131,3 +131,4 @@ dmypy.json
 *.tar
 places365_standard/
 *.txt
+.vscode/
