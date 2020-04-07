@@ -16,10 +16,15 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)
 
 Please refer [[Model Zoo]](#model_zoo)
 
-
 ## Train
 
 ### PyTorch == 1.x
+
+1. Download the data
+
+```bash
+sh download_data_pytorch.sh
+```
 
 ```bash
 python tools/train.py
@@ -27,9 +32,16 @@ python tools/train.py
 
 ### Tensorflow == 2.x
 
+1. Download the data. (Refer: https://github.com/tensorflow/datasets)
+
+```bash
+python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_small
+```
+
 - [ ] to do
 
 ## Test
 
-
 ## Deploy
+
+We first tranform the models from research to production. Then deploy it as a service.
