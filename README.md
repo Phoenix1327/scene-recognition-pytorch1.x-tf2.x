@@ -14,7 +14,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)
 
 ## Model Zoo (Pretrained Models)
 
-Please refer [[Model Zoo]](#model_zoo)
+Please refer [[Model Zoo]](#model_zoo.md)
 
 ## Train
 
