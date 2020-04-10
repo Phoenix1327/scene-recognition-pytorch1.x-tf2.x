@@ -44,6 +44,10 @@ python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_
 
 2. Train the model with multiple GPUs.
 
+```bash
+python tools/train_tf.py
+```
+
 ## Test
 
 ## Deploy

@@ -74,7 +74,7 @@ def main():
 
     # optionally resume from a checkpoint
     if cfgs['resume']:
-        if os.path.isfile(cfgs['resume']):
+        if osp.isfile(cfgs['resume']):
             logger.info("=> loading checkpoint '{}'".format(cfgs['resume']))
             checkpoint = torch.load(cfgs['resume'])
             cfgs['start_epoch'] = checkpoint['epoch']
@@ -120,29 +120,45 @@ def main():
                                 momentum=cfgs['momentum'],
                                 weight_decay=float(cfgs['weight_decay']))
 
-    if cfgs['evaluate']:
-        validate(val_loader, model, criterion, cfgs)
-        return
+    # if cfgs['evaluate']:
+    #     validate(val_loader, model, criterion, cfgs)
+    #     return
 
-    for epoch in range(cfgs['start_epoch'], cfgs['epochs']):
-        adjust_learning_rate(optimizer, epoch, cfgs)
+    # for epoch in range(cfgs['start_epoch'], cfgs['epochs']):
+    #     adjust_learning_rate(optimizer, epoch, cfgs)
 
-        # train for one epoch
-        train(train_loader, model, criterion, optimizer, epoch, cfgs)
+    #     # train for one epoch
+    #     train(train_loader, model, criterion, optimizer, epoch, cfgs)
 
-        # evaluate on validation set
-        acc1 = validate(val_loader, model, criterion, cfgs)
+    #     # evaluate on validation set
+    #     acc1 = validate(val_loader, model, criterion, cfgs)
 
-        # remember best acc@1 and save checkpoint
-        is_best = acc1 > best_acc1
-        best_acc1 = max(acc1, best_acc1)
-        save_checkpoint({
-            'epoch': epoch + 1,
-            'arch': cfgs['arch'],
-            'state_dict': model.state_dict(),
-            'best_acc1': best_acc1,
-        }, is_best, cfgs['weight_dir'] + '/' + cfgs['arch'].lower())
+    #     # remember best acc@1 and save checkpoint
+    #     is_best = acc1 > best_acc1
+    #     best_acc1 = max(acc1, best_acc1)
+    #     save_checkpoint({
+    #         'epoch': epoch + 1,
+    #         'arch': cfgs['arch'],
+    #         'state_dict': model.state_dict(),
+    #         'best_acc1': best_acc1,
+    #     }, is_best, cfgs['weight_dir'] + '/' + cfgs['arch'].lower())
 
+    logger.info("start to test the best model")
+    best_weight = cfgs['weight_dir'] + '/' + cfgs['arch'].lower() + '_best.pth.tar'
+    if osp.isfile(best_weight):
+        logger.info("=> loading best model '{}'".format(best_weight))
+        checkpoint = torch.load(best_weight)
+        best_acc1 = checkpoint['best_acc1']
+        epoch = checkpoint['epoch']
+        model.load_state_dict(checkpoint['state_dict'])
+
+        logger.info("=> loaded checkpoint '{}' (val Acc@1 {})"
+                    .format(best_weight, best_acc1))
+    else:
+        logger.info("=> no best model found at '{}'".format(best_weight))
+    
+    acc1 = validate(val_loader, model, criterion, cfgs)
+    
 
 def train(train_loader, model, criterion, optimizer, epoch, cfgs):
     logger = logging.getLogger('{}.train'.format(cfgs['log_name']))

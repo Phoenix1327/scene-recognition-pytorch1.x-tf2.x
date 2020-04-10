@@ -2,7 +2,7 @@ data_path: '/home/zhz/dataset/places365_standard'
 log_dir: logs
 weight_dir: weights
 
-arch: densenet161
+arch: mobilenet_v2
 workers: 6
 epochs: 90
 start_epoch: 0
