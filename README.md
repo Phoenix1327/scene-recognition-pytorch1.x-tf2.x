@@ -44,6 +44,8 @@ python scripts/remove_pytorch_module.py
 
 #### 4. Test a model
 
+Donwload pretrained weights from https://drive.google.com/drive/folders/1NbV3NZlgbqnLSd9zwZoz8kFpNQjUYolT?usp=sharing
+
 ```python
 python tools/test.py
 ```

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 
-arch = 'resnet50'
+arch = 'squeezenet1_0'
 model_file = 'checkpoints/%s_best.pth.tar' % arch
 save_pt_path = 'weights/%s_places365.pt' % arch
 
