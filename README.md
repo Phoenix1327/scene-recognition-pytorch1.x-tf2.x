@@ -1,6 +1,6 @@
 # Scene-Recognition-Service-PyTorch-TF2.0
 
-Scene recognition models based on pytorch and TF2.0.
+Scene recognition models based on pytorch and TF2.0. Upgraded from https://github.com/CSAILVision/places365
 
 ## Install
 
@@ -44,6 +44,8 @@ python scripts/remove_pytorch_module.py
 
 #### 4. Test a model
 
+Donwload pretrained weights from https://drive.google.com/drive/folders/1NbV3NZlgbqnLSd9zwZoz8kFpNQjUYolT?usp=sharing
+
 ```python
 python tools/test.py
 ```
@@ -62,6 +64,6 @@ python scripts/convert_torchscript.py
 python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_small
 ```
 
-#### - [ ] 2. Train the model with multiple GPUs
+- [ ] 2. Train the model with multiple GPUs
 
-#### - [ ] 3. Test models
+- [ ] 3. Test models

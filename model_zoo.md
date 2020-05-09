@@ -2,6 +2,8 @@
 
 ## PyTorch 1.x
 
+Download pretrained models from https://drive.google.com/drive/folders/1NbV3NZlgbqnLSd9zwZoz8kFpNQjUYolT?usp=sharing
+
 | Model Arch | Top 1  | Top 5  |
 |----------------|--------|--------|
 | ResNet18       | 54.373 | 84.696 |
