@@ -48,19 +48,14 @@ python scripts/remove_pytorch_module.py
 python tools/test.py
 ````
 
-
 ### Tensorflow == 2.x
 
-1. Download the data. (Refer: https://github.com/tensorflow/datasets)
+#### 1. Download the data. (Refer: https://github.com/tensorflow/datasets)
 
 ```bash
 python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_small
 ```
 
-- [ ] 2. Train the model with multiple GPUs.
+#### - [ ] 2. Train the model with multiple GPUs.
 
-todo
-
-## Deploy
-
-We first tranform the models from research to production. Then deploy it as a service.
+#### - [ ] 3. Test models
