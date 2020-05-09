@@ -1,6 +1,6 @@
 data_path: '/home/zhz/dataset/places365_standard'
 log_dir: logs
-weight_dir: weights
+weight_dir: checkpoints
 
 arch: mobilenet_v2
 workers: 6

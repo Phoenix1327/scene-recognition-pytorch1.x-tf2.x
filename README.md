@@ -22,17 +22,32 @@ We download the data from http://places2.csail.mit.edu/download.html
 
 ### PyTorch == 1.x
 
-1. Download the data. These images are 256x256 images, in a more friendly directory structure that in train and val split the images are organized such as train/reception/00003724.jpg and val/raft/000050000.jpg
+#### 1. Download the data
 
-```bash
+These images are 256x256 images, in a more friendly directory structure that in train and val split the images are organized such as train/reception/00003724.jpg and val/raft/000050000.jpg
+
+```python
 sh download_data_pytorch.sh
 ```
 
-2. Train the model with multiple GPUs.
+#### 2. Train the model with multiple GPUs
 
 ```bash
 python tools/train.py
 ```
+
+#### 3. Remove the .module
+
+```python
+python scripts/remove_pytorch_module.py
+```
+
+#### 4. Test the model
+
+````python
+python tools/test.py
+````
+
 
 ### Tensorflow == 2.x
 
@@ -42,13 +57,9 @@ python tools/train.py
 python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_small
 ```
 
-2. Train the model with multiple GPUs.
+- [ ] 2. Train the model with multiple GPUs.
 
-```bash
-python tools/train_tf.py
-```
-
-## Test
+todo
 
 ## Deploy
 

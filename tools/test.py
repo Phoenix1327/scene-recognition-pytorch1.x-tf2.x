@@ -4,19 +4,22 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 from PIL import Image
 
+print(torch.__version__)
 
-arch = 'resnet18'
-model_file = 'weights/%s_best.pth.tar' % arch
+arch = 'resnet50'
+# model_file = 'checkpoints/%s_best.pth.tar' % arch
+save_pt_path = 'weights/%s_places365.pt' % arch
 file_name = 'categories_places365.txt'
 img_name = "imgs/12.jpg"
-device = torch.device("cuda:0")
+device = torch.device("cuda:2")
 
 # https://discuss.pytorch.org/t/missing-keys-unexpected-keys-in-state-dict-when-loading-self-trained-model/22379/8
 model = models.__dict__[arch](num_classes=365)
+
+# checkpoint = torch.load(model_file)
+# model = nn.DataParallel(model)
+model.load_state_dict(torch.load(save_pt_path))
 model.to(device)
-checkpoint = torch.load(model_file)
-model = nn.DataParallel(model)
-model.load_state_dict(checkpoint['state_dict'])
 model.eval()
 
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
@@ -48,3 +51,5 @@ percentage = torch.nn.functional.softmax(outputs, dim=1)[0] * 100
 
 print(classes[predicted_idx], percentage[y_hat[0]].item())
 
+_, indices = torch.sort(outputs, descending=True)
+print([(classes[idx], percentage[idx].item()) for idx in indices[0][:5]])

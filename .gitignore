@@ -133,3 +133,4 @@ places365_standard/
 *.txt
 .vscode/
 official/
+*.pt
