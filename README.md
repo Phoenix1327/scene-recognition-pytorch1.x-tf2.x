@@ -42,11 +42,17 @@ python tools/train.py
 python scripts/remove_pytorch_module.py
 ```
 
-#### 4. Test the model
+#### 4. Test a model
 
-````python
+```python
 python tools/test.py
-````
+```
+
+#### 5. Convert a model to TorchScript
+
+```python
+python scripts/convert_torchscript.py
+```
 
 ### Tensorflow == 2.x
 
@@ -56,6 +62,6 @@ python tools/test.py
 python -m tensorflow_datasets.scripts.download_and_prepare --datasets=places365_small
 ```
 
-#### - [ ] 2. Train the model with multiple GPUs.
+#### - [ ] 2. Train the model with multiple GPUs
 
 #### - [ ] 3. Test models
